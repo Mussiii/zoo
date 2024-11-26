@@ -10,7 +10,7 @@ body{
 #main{
     width: 100%;
     height: 100%;
-    min-width: 1400px;
+    min-width: 1200px;
     zoom: 1;
 }
 
@@ -44,4 +44,25 @@ body{
     z-index: 5;
     bottom: 2%;
     right: 3%;
+}
+
+
+.introduction{
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: bisque;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 4px;
+    width: 12%;
+    height: 20%;
+    z-index: 101;
+}
+
+.animal_name{
+    border-bottom: 1px solid black;
+    font-size: 30px;
+    padding-bottom: 4%;
+    margin-bottom: 2%;
+    font-weight: 600;
 }

@@ -9,34 +9,149 @@
 <body>
     <div id="main">
         <div id="title">
-            <img src="./res/问答界面/1x/资源 52.png" style="position: absolute;bottom: 1%;left: 25%;transform:translate(-100%,0);"/>
-            <img src="./res/问答界面/1x/资源 51.png" style="position: absolute;left: 50%;   top:50%;transform:translate(-50%,-50%);"/>
-            <img src="./res/问答界面/1x/资源 53.png" style="position: absolute;top: 1%;right: 25%;transform:translate(100%,0)"/>
+            <img id="t_l" src="./res/quiz/1x/52.png" style="position: absolute;bottom: 1%;left: 25%;transform:translate(-100%,0);"/>
+            <img src="./res/quiz/1x/51.png" style="position: absolute;left: 50%;   top:50%;transform:translate(-50%,-50%);"/>
+            <img id="t_r" src="./res/quiz/1x/53.png" style="position: absolute;top: 1%;right: 25%;transform:translate(100%,0)"/>
+        </div>
+        <div id="begin">
+            <div id="begin1">你已经对动物朋友们有充足的了解啦！<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;让我们来进行一些问答小游戏吧~</div>
+            <div id="begin2" onclick="change1()">▶开始</div>
         </div>
         <div id="question">
             <div id="ask">
-                <img id="p-que" src="./res/问答界面/1x/资源 54-1.png" />
+                <img id="p-que" src="./res/quiz/1x/54-1.png" />
                 <p id="text">这是一个问题，测试一下是否有问题，换行问题、字体、显示测试测试测试测试测试测试测试测试测试测试吃吃吃吃吃吃吃吃吃啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
             </div>
-            <div id="answer">
-                <div class="choice">
-                    <input type="radio" id="c1" name="test" value="A" />
-                    <label for="c1">A.啊啊啊啊啊啊啊啊啊啊啊啊啊</label>    
+            <div style="position: relative;">
+                <img style="position: absolute;left: 14%;margin-top: 2%;width: 200px; transform: rotate(20deg);" src="" id="judge" />
+                <div id="btn2" onclick="get()">▷提交</div>
+                <div id="answer">
+                    <div class="choice">
+                        <span class="square_radio"></span>  
+                        <input type="radio" id="c1" name="test" value="A" onclick="show(0)" />
+                        <label for="c1" id="l1">A.啊啊啊啊啊啊啊啊啊啊啊啊啊</label>    
+                    </div>
+                    <div class="choice">
+                        <span class="square_radio"></span>
+                        <input type="radio" id="c2" name="test" value="B" onclick="show(1)" />
+                        <label for="c2" id="l2">B.啊啊啊啊啊啊啊啊啊啊啊啊啊</label>    
+                    </div>
+                    <div class="choice">
+                        <span class="square_radio"></span>
+                        <input type="radio" id="c3" name="test" value="C" onclick="show(2)" />
+                        <label for="c3" id="l3">C.啊啊啊啊啊啊啊啊啊啊啊啊啊</label>    
+                    </div>
+                    <div class="choice">
+                        <span class="square_radio"></span>
+                        <input type="radio" id="c4" name="test" value="D" onclick="show(3)" />
+                        <label for="c4" id="l4">D.啊啊啊啊啊啊啊啊啊啊啊啊啊</label>    
+                    </div>
                 </div>
-                <div class="choice">
-                    <input type="radio" id="c2" name="test" value="B" />
-                    <label for="c2">B.啊啊啊啊啊啊啊啊啊啊啊啊啊</label>    
-                </div>
-                <div class="choice">
-                    <input type="radio" id="c3" name="test" value="C" />
-                    <label for="c3">C.啊啊啊啊啊啊啊啊啊啊啊啊啊</label>    
-                </div>
-                <div class="choice">
-                    <input type="radio" id="c4" name="test" value="D" />
-                    <label for="c4">D.啊啊啊啊啊啊啊啊啊啊啊啊啊</label>    
-                </div>
+                <img id="quiz_pic" src="./res/quiz/1x/lesser_panda_1.jpg" />
             </div>
+            
         </div>
+        <div id="end"></div>
     </div>
+    <script>
+        function title_change(){
+            if(document.getElementById("t_l").src.includes("52")){
+                document.getElementById("t_l").src = "./res/quiz/1x/53.png";
+                document.getElementById("t_r").src = "./res/quiz/1x/52.png";
+            }
+            else{
+                document.getElementById("t_r").src = "./res/quiz/1x/53.png";
+                document.getElementById("t_l").src = "./res/quiz/1x/52.png";
+            }
+        }
+        window.onload = function() {
+            setInterval(title_change, 2000);
+        };
+
+        var right = 0;
+        var all = 0;
+
+        function change1(){
+            all = 1;
+            document.getElementById("begin").style.display="none";
+            document.getElementById("question").style.display="block";
+            document.getElementById("text").innerHTML="1、小熊猫是什么科、什么属的动物？";
+            document.getElementById("l1").innerHTML="A.浣熊科 小熊猫属";
+            document.getElementById("l2").innerHTML="B.熊猫亚科 小熊猫属";
+            document.getElementById("l3").innerHTML="C.熊科 熊猫属";
+            document.getElementById("l4").innerHTML="D.小熊猫科 小熊猫属";
+        }
+
+        function show(e){
+            var item = document.getElementsByClassName("square_radio");
+            if(!item){
+                alart("1");
+            }
+            for(var i=0;i<4;i++){
+                item[i].className = "square_radio";
+            }
+            item[e].className = "square_radio radio_active";
+        }
+
+        function get(){
+            var value = document.querySelector('input[name="test"]:checked').value;
+            // console.log(value);
+            if(all==1){
+                answer1(value);
+            }
+            else if(all==2){
+                answer2(value);
+            }
+        }
+
+        function answer1(v){
+            if(v=="D"){
+                document.getElementById("judge").src="./res/quiz/1x/right.png";
+                right++;
+            }
+            else{
+                document.getElementById("judge").src="./res/quiz/1x/wrong.png";
+            }
+            document.getElementById("btn2").innerHTML = "下一题";
+            document.getElementById("btn2").onclick = change2;
+            
+        }
+
+        function change2(){
+            all=2;
+            document.getElementById("judge").src="";
+            document.getElementById("btn2").innerHTML = "▷提交";
+            document.getElementById("btn2").onclick = get;
+            document.getElementById("quiz_pic").src = "./res/quiz/1x/araiguma_1.jpeg"
+            var item = document.getElementsByClassName("square_radio");
+            for(var i=0;i<4;i++){
+                item[i].className = "square_radio";
+            }
+            document.getElementById("text").innerHTML="2、浣熊的“黑色面罩”有什么作用？";
+            document.getElementById("l1").innerHTML="A.显得表情楚楚可怜";
+            document.getElementById("l2").innerHTML="B.减少眩光，增强夜视能力";
+            document.getElementById("l3").innerHTML="C.更容易隐藏在环境中";
+            document.getElementById("l4").innerHTML="D.能令其他动物感到害怕";
+        }
+
+        function answer2(v){
+            if(v=="B"){
+                document.getElementById("judge").src="./res/quiz/1x/right.png";
+                right++;
+            }
+            else{
+                document.getElementById("judge").src="./res/quiz/1x/wrong.png";
+            }
+            document.getElementById("btn2").innerHTML = "下一题";
+            document.getElementById("btn2").onclick = change_end;
+            
+        }
+
+        function change_end(){
+            document.getElementById("question").style.display="none";
+            document.getElementById("end").style.display="block";
+            document.getElementById("end").innerHTML="恭喜！您在本次测试中答对了"+right+"/"+all+"题~"
+        }
+    </script>
 </body>
 </html>
