@@ -20,9 +20,9 @@
             </div>
             <!-- 以下为其他动物 -->
             <img src="./res/map/Animals/animal_ezorisu.png" style="position: absolute;left: 81%;width: 2%;top: 52%;"
-                onmouseover="bigger(this)" onmouseout="smaller(this)" onclick="showInfo('introduction2', this)" />
+                onmouseover="bigger(this)" onmouseout="smaller(this)" onclick="showInfo('introduction2', this)" id="ezorisu" />
             <div id="introduction2" class="introduction" style="position: absolute;left: 82%;top: 35%;display: none;">
-                <div class="animal_name">日本松鼠</div>
+                <div class="animal_name">松鼠</div>
                 <div>松鼠：松鼠科（学名：Sciuridae），是哺乳纲啮齿目一个科，其下包括松鼠亚科（Sciurinae）和非洲地松鼠亚科（Xerinae），特征是长著毛茸茸的长尾巴。本科和与其亲缘关系接近的动物组成松鼠形亚目（Sciuromorpha）。</div>
             </div>
 
@@ -41,7 +41,7 @@
                 <div class="animal_name">无角绵羊</div>
                 <div>绵羊：绵羊（学名：Ovis aries）亦称为家羊或白羊，属哺乳纲偶蹄目牛科羊亚科，是一种四足反刍哺乳动物，也是世界上数量最多的羊种，共计超过十亿。
 
-大部分人类居住的地方都进行过牧羊，这也是许多文明的基本要素。现在为澳洲、新西兰、南美洲中部及南部，以及不列颠群岛的重要产业之一。</div>
+                    大部分人类居住的地方都进行过牧羊，这也是许多文明的基本要素。现在为澳洲、新西兰、南美洲中部及南部，以及不列颠群岛的重要产业之一。</div>
             </div>
 
             <img src="./res/map/Animals/animal_kirin.png" style="position: absolute;left: 51%;width: 8%;top: 18%;"
@@ -144,6 +144,14 @@
         <div id="btn">
             <a class="btn1" href="./quiz.html" target="_blank">动物小问答</a>
         </div>
+        <div id="alert" style="position: fixed;top: 2%;right: 2%;width: 150px;height: 170px;background-color: #c58a50;border-radius: 8px;" onclick="alert('introduction16',this)">
+            <img id="laba" src="./res/map/xiaolaba.png" style="width: 100px;margin-left: 28px;margin-top: 14px;z-index: 102;"/>
+            <div style="color: rgb(252, 252, 252);font-size: 24px;margin-left: 25px;margin-top: 18px;">操作指南</div>
+        </div>
+        <div id="introduction16" class="introduction" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);width: 32%;font-size: 20px;line-height: 30px;display: none;">
+            <div style="margin-top: 3%;margin-left: 2%;">&nbsp;&nbsp;点击动物图标可查看其相关介绍，再次点击可退出介绍界面。本界面也用相同方法退出~试试看吧！</div><br/>
+            <div style="margin-left: 2%;">&nbsp;&nbsp;点击右下角“动物小问答”按钮可进入问答页面。</div>
+        </div>
     </div>
     <script>
         function bigger(e) {
@@ -187,6 +195,24 @@
             };
             e.onclick = function() {
                 showInfo(introductionId, this);
+            };
+        }
+
+        function alert(introductionId, e){
+            document.getElementById("black_screen").style.display = "block";
+            document.getElementById(introductionId).style.display = "block";
+            e.style.zIndex = "101";
+            e.onclick = function() {
+                hideAlert(introductionId, e);
+            };
+        }
+
+        function hideAlert(introductionId, e) {
+            document.getElementById("black_screen").style.display = "none";
+            document.getElementById(introductionId).style.display = "none";
+            e.style.zIndex = "auto";
+            e.onclick = function() {
+                alert(introductionId, this);
             };
         }
     </script>

@@ -23,27 +23,27 @@
                 <p id="text">这是一个问题，测试一下是否有问题，换行问题、字体、显示测试测试测试测试测试测试测试测试测试测试吃吃吃吃吃吃吃吃吃啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
             </div>
             <div style="position: relative;">
-                <img style="position: absolute;left: 14%;margin-top: 2%;width: 200px; transform: rotate(20deg);" src="" id="judge" />
+                <img src="" id="judge" />
                 <div id="btn2" onclick="get()">▷提交</div>
                 <div id="answer">
-                    <div class="choice">
+                    <div class="choice" onclick="show(0)">
                         <span class="square_radio"></span>  
-                        <input type="radio" id="c1" name="test" value="A" onclick="show(0)" />
+                        <input type="radio" id="c1" name="test" value="A" />
                         <label for="c1" id="l1">A.啊啊啊啊啊啊啊啊啊啊啊啊啊</label>    
                     </div>
-                    <div class="choice">
+                    <div class="choice" onclick="show(1)">
                         <span class="square_radio"></span>
-                        <input type="radio" id="c2" name="test" value="B" onclick="show(1)" />
+                        <input type="radio" id="c2" name="test" value="B" />
                         <label for="c2" id="l2">B.啊啊啊啊啊啊啊啊啊啊啊啊啊</label>    
                     </div>
-                    <div class="choice">
+                    <div class="choice" onclick="show(2)">
                         <span class="square_radio"></span>
-                        <input type="radio" id="c3" name="test" value="C" onclick="show(2)" />
+                        <input type="radio" id="c3" name="test" value="C" />
                         <label for="c3" id="l3">C.啊啊啊啊啊啊啊啊啊啊啊啊啊</label>    
                     </div>
-                    <div class="choice">
+                    <div class="choice" onclick="show(3)">
                         <span class="square_radio"></span>
-                        <input type="radio" id="c4" name="test" value="D" onclick="show(3)" />
+                        <input type="radio" id="c4" name="test" value="D" />
                         <label for="c4" id="l4">D.啊啊啊啊啊啊啊啊啊啊啊啊啊</label>    
                     </div>
                 </div>
@@ -52,6 +52,7 @@
             
         </div>
         <div id="end"></div>
+        <img id="end_pic" src="" />
     </div>
     <script>
         function title_change(){
@@ -91,6 +92,7 @@
                 item[i].className = "square_radio";
             }
             item[e].className = "square_radio radio_active";
+            document.getElementById("c"+(e+1)).checked = true
         }
 
         function get(){
@@ -105,6 +107,7 @@
         }
 
         function answer1(v){
+            
             if(v=="D"){
                 document.getElementById("judge").src="./res/quiz/1x/right.png";
                 right++;
@@ -112,6 +115,10 @@
             else{
                 document.getElementById("judge").src="./res/quiz/1x/wrong.png";
             }
+            // 当图片加载完成后添加 loaded 类来触发动画
+            document.getElementById("judge").onload = function() {
+                document.getElementById("judge").classList.add('loaded');
+            };
             document.getElementById("btn2").innerHTML = "下一题";
             document.getElementById("btn2").onclick = change2;
             
@@ -123,6 +130,8 @@
             document.getElementById("btn2").innerHTML = "▷提交";
             document.getElementById("btn2").onclick = get;
             document.getElementById("quiz_pic").src = "./res/quiz/1x/araiguma_1.jpeg"
+            // 重置图像，去除loaded类，触发重新加载
+            document.getElementById("judge").classList.remove('loaded'); 
             var item = document.getElementsByClassName("square_radio");
             for(var i=0;i<4;i++){
                 item[i].className = "square_radio";
@@ -150,7 +159,21 @@
         function change_end(){
             document.getElementById("question").style.display="none";
             document.getElementById("end").style.display="block";
-            document.getElementById("end").innerHTML="恭喜！您在本次测试中答对了"+right+"/"+all+"题~"
+            document.getElementById("end_pic").style.display="block";
+            var score = right/all;
+            if(score>=0.9){
+                document.getElementById("end").innerHTML="恭喜！您在本次测试中答对了"+right+"/"+all+"题~";
+                document.getElementById("end_pic").src="./res/quiz/1x/youA+.jpg";
+            }
+            else if(score>=0.6){
+                document.getElementById("end").innerHTML="您答对了"+right+"/"+all+"题 , 再接再厉！";
+                document.getElementById("end_pic").src="./res/quiz/1x/you_no.01.png";
+            }
+            else{
+                document.getElementById("end").innerHTML="您答对了"+right+"/"+all+"题。还需努力哦 , 加油！";
+                document.getElementById("end_pic").src="./res/quiz/1x/nggyu.png";
+            }
+            
         }
     </script>
 </body>

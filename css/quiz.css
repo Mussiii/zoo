@@ -145,7 +145,7 @@ input[type="radio"] {
 #end{
     display: none;
     text-align: center;
-    margin-top: 15%;
+    margin-top: 6%;
     font-family: "undefined";
     font-weight: normal;
     font-style: oblique;
@@ -153,3 +153,35 @@ input[type="radio"] {
     font-size: 100px;
 
 }
+
+#judge{
+    position: absolute;
+      left: 14%;
+      margin-top: 2%;
+      width: 200px;
+      transform: rotate(20deg);
+      transition: all 0.5s ease;
+      clip-path: inset(100% 0 0 0); /* 初始时隐藏图片 */
+}
+
+#judge.loaded {
+    clip-path: inset(0 0 0 0); /* 图片从下到上渐显 */
+  }
+
+
+  #end_pic{
+    display: none;
+    width: 300px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    animation: emoji 2s linear infinite;
+    margin-bottom: 2%;
+    margin-left: 2%;
+  }
+
+@keyframes emoji{
+    0%{width: 100px;}
+    50%{width: 500px;}
+    100%{width: 100px;}
+  }
