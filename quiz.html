@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/quiz.css">
+    <script type="text/javascript" src="./jquery-3.7.1.min.js"></script>
     <title>问答小游戏</title>
 </head>
 <body>
@@ -74,13 +75,13 @@
 
         function change1(){
             all = 1;
-            document.getElementById("begin").style.display="none";
-            document.getElementById("question").style.display="block";
-            document.getElementById("text").innerHTML="1、小熊猫是什么科、什么属的动物？";
-            document.getElementById("l1").innerHTML="A.浣熊科 小熊猫属";
-            document.getElementById("l2").innerHTML="B.熊猫亚科 小熊猫属";
-            document.getElementById("l3").innerHTML="C.熊科 熊猫属";
-            document.getElementById("l4").innerHTML="D.小熊猫科 小熊猫属";
+            $("#begin").hide();
+            $("#question").show();
+            $("#text").html("1、小熊猫是什么科、什么属的动物？");
+            $("#l1").html("A.浣熊科 小熊猫属");
+            $("#l2").html("B.熊猫亚科 小熊猫属");
+            $("#l3").html("C.熊科 熊猫属");
+            $("#l4").html("D.小熊猫科 小熊猫属");
         }
 
         function show(e){
@@ -104,56 +105,85 @@
             else if(all==2){
                 answer2(value);
             }
+            else if(all==3){
+                answer3(value);
+            }
         }
 
-        function answer1(v){
-            
-            if(v=="D"){
-                document.getElementById("judge").src="./res/quiz/1x/right.png";
+        function answer1(v){ 
+            if (v === "D") {
+                $("#judge").attr("src", "./res/quiz/1x/right.png");
                 right++;
-            }
-            else{
-                document.getElementById("judge").src="./res/quiz/1x/wrong.png";
+            } else {
+                $("#judge").attr("src", "./res/quiz/1x/wrong.png");
             }
             // 当图片加载完成后添加 loaded 类来触发动画
-            document.getElementById("judge").onload = function() {
-                document.getElementById("judge").classList.add('loaded');
-            };
+            $("#judge").on("load", function () {
+                $(this).addClass("loaded");
+            });
             document.getElementById("btn2").innerHTML = "下一题";
             document.getElementById("btn2").onclick = change2;
             
         }
 
-        function change2(){
-            all=2;
-            document.getElementById("judge").src="";
+        function change2() {
+            all = 2;
+            document.getElementById("judge").src = "";
             document.getElementById("btn2").innerHTML = "▷提交";
             document.getElementById("btn2").onclick = get;
-            document.getElementById("quiz_pic").src = "./res/quiz/1x/araiguma_1.jpeg"
-            // 重置图像，去除loaded类，触发重新加载
-            document.getElementById("judge").classList.remove('loaded'); 
+            document.getElementById("quiz_pic").src = "./res/quiz/1x/araiguma_1.jpeg";
+            // 重置图像，去除 loaded 类，触发重新加载
+            document.getElementById("judge").classList.remove('loaded');
             var item = document.getElementsByClassName("square_radio");
-            for(var i=0;i<4;i++){
+            for (var i = 0; i < 4; i++) {
                 item[i].className = "square_radio";
             }
-            document.getElementById("text").innerHTML="2、浣熊的“黑色面罩”有什么作用？";
-            document.getElementById("l1").innerHTML="A.显得表情楚楚可怜";
-            document.getElementById("l2").innerHTML="B.减少眩光，增强夜视能力";
-            document.getElementById("l3").innerHTML="C.更容易隐藏在环境中";
-            document.getElementById("l4").innerHTML="D.能令其他动物感到害怕";
+            document.getElementById("text").innerHTML = "2、浣熊的“黑色面罩”有什么作用？";
+            document.getElementById("l1").innerHTML = "A.显得表情楚楚可怜";
+            document.getElementById("l2").innerHTML = "B.减少眩光，增强夜视能力";
+            document.getElementById("l3").innerHTML = "C.更容易隐藏在环境中";
+            document.getElementById("l4").innerHTML = "D.能令其他动物感到害怕";
         }
 
-        function answer2(v){
-            if(v=="B"){
-                document.getElementById("judge").src="./res/quiz/1x/right.png";
+        function answer2(v) {
+            if (v == "B") {
+                document.getElementById("judge").src = "./res/quiz/1x/right.png";
                 right++;
-            }
-            else{
-                document.getElementById("judge").src="./res/quiz/1x/wrong.png";
+            } else {
+                document.getElementById("judge").src = "./res/quiz/1x/wrong.png";
             }
             document.getElementById("btn2").innerHTML = "下一题";
+            document.getElementById("btn2").onclick = change3;
+        }
+
+        function change3() {
+            all = 3;
+            document.getElementById("judge").src = "";
+            document.getElementById("btn2").innerHTML = "▷提交";
+            document.getElementById("btn2").onclick = get;
+            document.getElementById("quiz_pic").src = "./res/quiz/1x/penguin.jpg";
+            // 重置图像，去除 loaded 类，触发重新加载
+            document.getElementById("judge").classList.remove('loaded');
+            var item = document.getElementsByClassName("square_radio");
+            for (var i = 0; i < 4; i++) {
+                item[i].className = "square_radio";
+            }
+            document.getElementById("text").innerHTML = "3、企鹅的主要食物是什么？";
+            document.getElementById("l1").innerHTML = "A.海藻";
+            document.getElementById("l2").innerHTML = "B.鱼类和磷虾";
+            document.getElementById("l3").innerHTML = "C.贝类";
+            document.getElementById("l4").innerHTML = "D.浮游生物";
+        }
+
+        function answer3(v) {
+            if (v == "B") {
+                document.getElementById("judge").src = "./res/quiz/1x/right.png";
+                right++;
+            } else {
+                document.getElementById("judge").src = "./res/quiz/1x/wrong.png";
+            }
+            document.getElementById("btn2").innerHTML = "结束测试";
             document.getElementById("btn2").onclick = change_end;
-            
         }
 
         function change_end(){

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>动物园导览</title>
     <link rel="stylesheet" href="./css/index.css">
+    <script type="text/javascript" src="./jquery-3.7.1.min.js"></script>
 </head>
 <body> 
     <div style="position: fixed;top: 0;bottom: 0;left: 0;right: 0;opacity: 0.7;background-color: black;z-index: 100;display: none;" id="black_screen"></div>
@@ -158,9 +159,12 @@
             let w = parseInt(e.style.width);
             let l = parseInt(e.style.left);
             let t = parseInt(e.style.top);
-            e.style.width = (w + 4) + "%";
-            e.style.left = (l - 4) + "%";
-            e.style.top = (t - 4) + "%";
+            let $e = $(e);
+            $e.css({
+                width: (w + 4) + "%",
+                left: (l - 4) + "%",
+                top: (t - 4) + "%"
+            });
         }
 
         function smaller(e) {
@@ -173,8 +177,8 @@
         }
 
         function showInfo(introductionId, e) {
-            document.getElementById("black_screen").style.display = "block";
-            document.getElementById(introductionId).style.display = "block";
+            $("#black_screen").show();
+            $("#" + introductionId).show();
             e.style.zIndex = "101";
             e.onmouseover = null;
             e.onmouseout = null;
